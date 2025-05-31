@@ -1,4 +1,4 @@
-from .models import Producto, Precio
+from .models import Producto, Precio, Categoria
 from rest_framework import serializers
 
 class ProductoSerializer(serializers.ModelSerializer):
@@ -17,3 +17,9 @@ class ProductoSerializer(serializers.ModelSerializer):
                 'fecha': ultimo_precio.fecha
             }
         return None
+
+
+class CategoriaSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Categoria
+        fields = ['id', 'nombre']

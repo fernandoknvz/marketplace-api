@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>FERREMAS - Ecommerce</title>
+  <link rel="stylesheet" href="css/style.css">
   <style>
     body { font-family: Arial; margin: 0; padding: 0; }
     header { background-color: #444; color: white; padding: 1em; text-align: center; }
@@ -26,9 +27,24 @@
     <a href="./carrito.html">Carrito</a>
     <a href="#contacto">Contacto</a>
   </nav>
+  <section style="text-align: start; padding: 1em;">
+    <label for="categoriaSelect"><strong>Filtrar por categoría:</strong></label>
+    <select  id="categoriaSelect" onchange="filtrarPorCategoria()">
+      <option value="">Todas</option>
+    </select>
+  </section>
 
   <section id="productos" class="productos"></section>
   <section id="detalle" class="detalle"></section>
+
+  <!-- Modal de Detalle -->
+  <div id="detalleModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <div id="detalle-modal-content"></div>
+    </div>
+  </div>
+
 
   <script src="js/app.js"></script>
 </body>

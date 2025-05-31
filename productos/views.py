@@ -1,6 +1,6 @@
 from rest_framework import viewsets
-from .models import Producto
-from .serializers import ProductoSerializer
+from .models import Producto, Categoria
+from .serializers import ProductoSerializer, CategoriaSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework import status
@@ -25,3 +25,9 @@ def detalle_producto(request, pk):
 
     serializer = ProductoSerializer(producto)
     return Response(serializer.data)
+
+
+
+class CategoriaViewSet(viewsets.ModelViewSet):
+    queryset = Categoria.objects.all()
+    serializer_class = CategoriaSerializer
