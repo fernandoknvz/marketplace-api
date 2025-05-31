@@ -3,9 +3,17 @@
 <head>
   <meta charset="UTF-8">
   <title>FERREMAS - Ecommerce</title>
-  <link rel="stylesheet" href="./css/index.css">
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+  <style>
+    body { font-family: Arial; margin: 0; padding: 0; }
+    header { background-color: #444; color: white; padding: 1em; text-align: center; }
+    nav { background-color: #eee; padding: 0.5em; text-align: center; }
+    nav a { margin: 0 1em; text-decoration: none; color: #333; font-weight: bold; }
+    .productos { display: flex; flex-wrap: wrap; justify-content: center; padding: 1em; gap: 1em; }
+    .card { border: 1px solid #ccc; padding: 1em; width: 200px; border-radius: 5px; }
+    .card h3 { margin-top: 0; }
+    .detalle { padding: 1em; }
+    button { padding: 0.5em 1em; margin-top: 0.5em; }
+  </style>
 </head>
 <body>
   <header>
@@ -14,19 +22,24 @@
     </div>
   </header>
 
-<nav>
-  <div class="nav-izquierda">
-    <a href="#"><i class="fas fa-house"></i> Inicio</a>
-    <a href="#productos"><i class="fas fa-boxes-stacked"></i> Productos</a>
-    <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
-  </div>
-  <div class="nav-derecha">
-    <a href="./carrito.html" class="carrito-icono"><i class="fas fa-cart-shopping"></i></a>
-  </div>
-</nav>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#productos">Productos</a>
+    <a href="./carrito.html">Carrito</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
 
   <section id="productos" class="productos"></section>
   <section id="detalle" class="detalle"></section>
+
+  <!-- Modal de Detalle -->
+  <div id="detalleModal" class="modal" style="display:none;">
+    <div class="modal-content">
+      <span class="close" onclick="cerrarModal()">&times;</span>
+      <div id="detalle-modal-content"></div>
+    </div>
+  </div>
+
 
   <script src="./js/app.js"></script>
 </body>
