@@ -87,3 +87,31 @@ class TasaCambioView(APIView):
             return Response({"usd_to_clp": valor})
         else:
             return Response({"error": "No se pudo obtener la tasa de cambio"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
+
+
+class DetalleOrdenAPIView(APIView):
+    def get(self, request, pk):
+        try:
+            orden = OrdenVenta.objects.get(pk=pk)
+            detalles = DetalleVenta.objects.filter(orden=orden)
+
+            resultado = []
+            total = 0
+
+            for item in detalles:
+                subtotal = item.cantidad * item.precio_unitario
+                total += subtotal
+                resultado.append({
+                    "producto": item.producto.nombre,
+                    "cantidad": item.cantidad,
+                    "precio_unitario": item.precio_unitario,
+                    "subtotal": subtotal
+                })
+
+            return Response({
+                "detalle": resultado,
+                "total": total
+            })
+
+        except OrdenVenta.DoesNotExist:
+            return Response({"error": "Orden no encontrada"}, status=status.HTTP_404_NOT_FOUND)

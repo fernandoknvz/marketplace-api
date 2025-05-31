@@ -66,6 +66,7 @@ class VerCarritoView(APIView):
             total += subtotal
 
             resultado.append({
+                "producto_id": item.producto.id,
                 "producto": item.producto.nombre,
                 "cantidad": item.cantidad,
                 "precio_unitario": precio_valor,
@@ -120,7 +121,6 @@ class ConfirmarCompraView(APIView):
                     item.producto.save()
 
                 # Vaciar carrito
-                # Después de registrar la orden y sus detalles
                 ItemCarrito.objects.all().delete()
 
 

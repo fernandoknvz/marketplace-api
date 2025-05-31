@@ -1,26 +1,35 @@
-<!-- frontend/index.html -->
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>FERREMAS - Visualizador</title>
-    <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8">
+  <title>FERREMAS - Ecommerce</title>
+  <style>
+    body { font-family: Arial; margin: 0; padding: 0; }
+    header { background-color: #444; color: white; padding: 1em; text-align: center; }
+    nav { background-color: #eee; padding: 0.5em; text-align: center; }
+    nav a { margin: 0 1em; text-decoration: none; color: #333; font-weight: bold; }
+    .productos { display: flex; flex-wrap: wrap; justify-content: center; padding: 1em; gap: 1em; }
+    .card { border: 1px solid #ccc; padding: 1em; width: 200px; border-radius: 5px; }
+    .card h3 { margin-top: 0; }
+    .detalle { padding: 1em; }
+    button { padding: 0.5em 1em; margin-top: 0.5em; }
+  </style>
 </head>
 <body>
-    <h1>Productos por Categoría</h1>
+  <header>
+    <h1>FERREMAS</h1>
+  </header>
 
-    <label for="categoria">Selecciona una categoría:</label>
-    <select id="categoria">
-        <option value="1">Herramientas</option>
-        <option value="2">Materiales de construcción</option>
-        <option value="3">Seguridad</option>
-        <!-- Puedes ajustar los valores si tus IDs son distintos -->
-    </select>
+  <nav>
+    <a href="#">Inicio</a>
+    <a href="#productos">Productos</a>
+    <a href="./carrito.html">Carrito</a>
+    <a href="#contacto">Contacto</a>
+  </nav>
 
-    <button onclick="cargarProductos()">Buscar</button>
+  <section id="productos" class="productos"></section>
+  <section id="detalle" class="detalle"></section>
 
-    <div id="resultado"></div>
-
-    <script src="app.js"></script>
+  <script src="js/app.js"></script>
 </body>
 </html>
