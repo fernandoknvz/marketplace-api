@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Cliente
+from .models import Cliente, ConsultaContacto
 
 class ClienteRegistroSerializer(serializers.ModelSerializer):
     class Meta:
@@ -8,3 +8,10 @@ class ClienteRegistroSerializer(serializers.ModelSerializer):
 
     def create(self, validated_data):
         return Cliente.objects.create(**validated_data)
+
+
+
+class ConsultaContactoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = ConsultaContacto
+        fields = '__all__'

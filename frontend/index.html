@@ -1,0 +1,26 @@
+<!-- frontend/index.html -->
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>FERREMAS - Visualizador</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Productos por Categoría</h1>
+
+    <label for="categoria">Selecciona una categoría:</label>
+    <select id="categoria">
+        <option value="1">Herramientas</option>
+        <option value="2">Materiales de construcción</option>
+        <option value="3">Seguridad</option>
+        <!-- Puedes ajustar los valores si tus IDs son distintos -->
+    </select>
+
+    <button onclick="cargarProductos()">Buscar</button>
+
+    <div id="resultado"></div>
+
+    <script src="app.js"></script>
+</body>
+</html>

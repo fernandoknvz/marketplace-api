@@ -1,18 +1,19 @@
-from rest_framework import serializers
 from .models import Producto, Precio
-from datetime import date
+from rest_framework import serializers
 
 class ProductoSerializer(serializers.ModelSerializer):
-    precio_inicial = serializers.DecimalField(
-        max_digits=10, decimal_places=2, write_only=True
-    )
+    categoria_nombre = serializers.CharField(source='categoria.nombre', read_only=True)
+    precio_actual = serializers.SerializerMethodField()
 
     class Meta:
         model = Producto
-        fields = ['id', 'codigo_producto', 'nombre', 'marca', 'stock', 'categoria', 'precio_inicial']
+        fields = ['id', 'codigo_producto', 'nombre', 'marca', 'stock', 'categoria', 'categoria_nombre', 'precio_actual']
 
-    def create(self, validated_data):
-        precio_valor = validated_data.pop('precio_inicial')
-        producto = Producto.objects.create(**validated_data)
-        Precio.objects.create(producto=producto, fecha=date.today(), valor=precio_valor)
-        return producto
+    def get_precio_actual(self, obj):
+        ultimo_precio = Precio.objects.filter(producto=obj).order_by('-fecha').first()
+        if ultimo_precio:
+            return {
+                'valor': ultimo_precio.valor,
+                'fecha': ultimo_precio.fecha
+            }
+        return None

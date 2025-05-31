@@ -1,0 +1,13 @@
+/* frontend/style.css */
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+label, select, button {
+    margin: 10px 0;
+    display: block;
+}
+ul {
+    list-style: none;
+    padding-left: 0;
+}

@@ -21,7 +21,7 @@ class OrdenVenta(models.Model):
     cliente = models.ForeignKey(Cliente, on_delete=models.CASCADE, related_name='ordenes')
     empleado = models.ForeignKey(Empleado, on_delete=models.CASCADE, related_name='ventas')  
     fecha = models.DateTimeField(auto_now_add=True)
-
+    estado_pago = models.CharField(max_length=20, default='pendiente')
     class Meta:
         db_table = 'orden_venta'  
 

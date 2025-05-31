@@ -130,3 +130,11 @@ class ConfirmarCompraView(APIView):
             return Response({"error": "No existe carrito"}, status=400)
         except Exception as e:
             return Response({"error": str(e)}, status=500)
+class VaciarCarritoView(APIView):
+    def post(self, request):
+        try:
+            carrito = Carrito.objects.get(pk=1)  # asumimos 1 como carrito actual
+            ItemCarrito.objects.filter(carrito=carrito).delete()
+            return Response({"mensaje": "Carrito vaciado correctamente"}, status=status.HTTP_200_OK)
+        except Carrito.DoesNotExist:
+            return Response({"error": "Carrito no encontrado"}, status=status.HTTP_404_NOT_FOUND)

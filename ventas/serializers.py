@@ -58,3 +58,14 @@ class OrdenVentaSerializer(serializers.ModelSerializer):
     class Meta:
         model = OrdenVenta
         fields = '__all__'
+
+
+# ventas/serializers.py
+
+from rest_framework import serializers
+from .models import OrdenVenta
+
+class SimularPagoSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = OrdenVenta
+        fields = ['id', 'estado_pago']
