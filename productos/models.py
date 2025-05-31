@@ -15,6 +15,7 @@ class Producto(models.Model):
     marca = models.CharField(max_length=100, null=True, blank=True)
     stock = models.IntegerField()
     categoria = models.ForeignKey(Categoria, on_delete=models.CASCADE, null=True)
+    imagen_url = models.URLField(blank=True, null=True)
 
     class Meta:
         db_table = 'productos'

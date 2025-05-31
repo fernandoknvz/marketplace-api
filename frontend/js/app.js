@@ -32,6 +32,7 @@ async function cargarProductos(categoriaId = "") {
     div.className = 'card';
 
     div.innerHTML = `
+      <img src="${producto.imagen_url}" alt="${producto.nombre}" style="width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px;">
       <h3>${producto.nombre}</h3>
       <p><strong>Marca:</strong> ${producto.marca}</p>
       <p><strong>Stock:</strong> ${producto.stock}</p>
