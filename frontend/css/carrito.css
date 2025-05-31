@@ -1,0 +1,161 @@
+/* General */
+body {
+  font-family: 'Segoe UI', sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+/* Header con logo */
+header {
+  background-color: #343a40;
+  padding: 1rem;
+  text-align: center;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo {
+  width: 180px;
+  height: auto;
+}
+
+/* Navbar */
+nav {
+  background-color: #fff;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nav-izquierda,
+.nav-derecha {
+  display: flex;
+  align-items: center;
+}
+
+.nav-izquierda a {
+  margin-right: 1.5rem;
+}
+
+nav a {
+  text-decoration: none;
+  color: #000;
+  font-weight: 600;
+  transition: color 0.3s;
+  display: flex;
+  align-items: center;
+}
+
+nav a i {
+  font-size: 1.4rem;
+  margin-right: 0.5rem;
+}
+
+nav a:hover {
+  color: #555;
+}
+
+.carrito-icono {
+  font-size: 1.6rem;
+}
+
+.carrito-icono i {
+  margin: 0;
+}
+
+/* Contenido principal */
+main {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 3rem auto 0 auto; /* <--- Separación superior desde navbar */
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+h2 {
+  font-size: 1.8rem;
+  color: #343a40;
+  margin-bottom: 1.5rem;
+}
+
+/* Tabla del carrito */
+#carrito table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-bottom: 1rem;
+}
+
+#carrito th,
+#carrito td {
+  border: 1px solid #dee2e6;
+  padding: 1rem;
+  text-align: center;
+}
+
+#carrito th {
+  background-color: #f8f9fa;
+  font-weight: bold;
+}
+
+/* Total */
+#total {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #343a40;
+  margin-top: 1rem;
+}
+
+/* Botones */
+button {
+  padding: 0.6rem 1.2rem;
+  margin: 0.5rem;
+  background-color: #343a40;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #222;
+}
+
+/* Acciones del carrito */
+.acciones {
+  margin-top: 1rem;
+  display: flex;
+  gap: 1rem;
+}
+
+/* Footer */
+footer {
+  background-color: #343a40;
+  color: white;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 0.9rem;
+  margin-top: 2rem;
+}
+
+footer p {
+  margin: 0.2rem;
+}
+
+input[type="number"] {
+  width: 40px;
+  padding: 0.4rem;
+  font-size: 1rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
