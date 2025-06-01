@@ -7,10 +7,24 @@ function cargarCarrito() {
             const contenedor = document.getElementById("carrito");
             contenedor.innerHTML = "";
 
+            const btnPagar = document.querySelector("button[onclick*='checkout.html']");
+
             if (data.carrito.length === 0) {
                 contenedor.innerHTML = "<p>El carrito está vacío.</p>";
+                if (btnPagar) {
+                    btnPagar.disabled = true;
+                    btnPagar.classList.add("disabled");
+                }
+                document.getElementById("total").textContent = "Total: $0";
                 return;
+            } else {
+                if (btnPagar) {
+                    btnPagar.disabled = false;
+                    btnPagar.classList.remove("disabled");
+                }
             }
+
+            const formatter = new Intl.NumberFormat('es-CL');
 
             let html = "<table><thead><tr><th>Producto</th><th>Cantidad</th><th>Precio Unitario</th><th>Subtotal</th><th>Actualizar</th></tr></thead><tbody>";
             data.carrito.forEach((item, index) => {
@@ -19,8 +33,8 @@ function cargarCarrito() {
                     <td>
                         <input type="number" min="1" value="${item.cantidad}" id="cantidad-${index}">
                     </td>
-                    <td>$${item.precio_unitario}</td>
-                    <td>$${item.subtotal}</td>
+                    <td>$${formatter.format(item.precio_unitario)}</td>
+                    <td>$${formatter.format(item.subtotal)}</td>
                     <td>
                         <button onclick="actualizarCantidad(${item.producto_id}, document.getElementById('cantidad-${index}').value)">Actualizar</button>
                     </td>
@@ -29,7 +43,7 @@ function cargarCarrito() {
             html += "</tbody></table>";
 
             contenedor.innerHTML = html;
-            document.getElementById("total").textContent = "Total: $" + data.total;
+            document.getElementById("total").textContent = "Total: $" + formatter.format(data.total);
         })
         .catch(error => console.error("Error al cargar el carrito:", error));
 }

@@ -10,7 +10,6 @@ class ClienteRegistroSerializer(serializers.ModelSerializer):
         return Cliente.objects.create(**validated_data)
 
 
-
 class ConsultaContactoSerializer(serializers.ModelSerializer):
     class Meta:
         model = ConsultaContacto

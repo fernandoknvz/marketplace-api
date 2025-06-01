@@ -3,30 +3,27 @@
 <head>
   <meta charset="UTF-8">
   <title>Detalle de Compra - FERREMAS</title>
-  <link rel="stylesheet" href="css/style.css">
-  <style>
-    body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-    header { background-color: #444; color: white; padding: 1em; text-align: center; }
-    nav { background-color: #eee; padding: 0.5em; text-align: center; }
-    nav a { margin: 0 1em; text-decoration: none; color: #333; font-weight: bold; }
-    main { max-width: 800px; margin: 2em auto; padding: 1em; }
-    h2 { text-align: center; }
-    table { width: 100%; border-collapse: collapse; margin-top: 1em; }
-    th, td { border: 1px solid #ccc; padding: 0.75em; text-align: center; }
-    th { background-color: #f5f5f5; }
-    #mensaje-final { text-align: center; margin-top: 2em; font-weight: bold; color: green; font-size: 1.2em; }
-  </style>
+  <link rel="stylesheet" href="css/detalle.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
   <header>
-    <h1>FERREMAS</h1>
+    <div class="logo-container">
+      <img src="/static/img/logo.png" alt="Logo Ferremas" class="logo">
+    </div>
   </header>
 
   <nav>
-    <a href="index.html">Inicio</a>
-    <a href="index.html#productos">Productos</a>
-    <a href="carrito.html">Carrito</a>
-    <a href="#contacto">Contacto</a>
+    <div class="nav-izquierda">
+      <a href="index.html"><i class="fas fa-house"></i> Inicio</a>
+      <a href="index.html#productos"><i class="fas fa-boxes-stacked"></i> Productos</a>
+      <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+    </div>
+    <div class="nav-derecha">
+      <a href="carrito.html" class="carrito-icono" title="Carrito">
+        <i class="fas fa-cart-shopping"></i>
+      </a>
+    </div>
   </nav>
 
   <main>
@@ -35,6 +32,11 @@
     </section>
     <div id="mensaje-final"></div>
   </main>
+
+  <footer>
+    <p>&copy; 2025 FERREMAS. Todos los derechos reservados.</p>
+    <p>Contacto: contacto@ferremas.cl | +56 9 1234 5678</p>
+  </footer>
 
   <script src="js/detalle.js"></script>
 </body>

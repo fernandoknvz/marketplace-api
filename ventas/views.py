@@ -7,6 +7,8 @@ from rest_framework import status
 from .serializers import OrdenVentaCreateSerializer
 from .models import OrdenVenta
 import requests
+from .utils import obtener_dolar_a_clp
+
 
 class RegistrarVentaAPIView(APIView):
     def post(self, request):
@@ -31,7 +33,6 @@ class DetalleVentaViewSet(viewsets.ModelViewSet):
     queryset = DetalleVenta.objects.all()
     serializer_class = DetalleVentaSerializer
 
-
 class RegistrarVentaAPIView(APIView):
     def post(self, request):
         serializer = OrdenVentaCreateSerializer(data=request.data)
@@ -40,7 +41,6 @@ class RegistrarVentaAPIView(APIView):
             return Response({"mensaje": f"Orden #{orden.id} registrada correctamente"}, status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
     
-
 class SimularPagoView(APIView):
     def post(self, request, pk):
         try:
@@ -58,7 +58,6 @@ class SimularPagoView(APIView):
         }, status=status.HTTP_200_OK)
     
 
-
 class ValorDolarAPIView(APIView):
     def get(self, request):
         try:
@@ -74,21 +73,17 @@ class ValorDolarAPIView(APIView):
             return Response({"error": str(e)}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
 
 
-# ventas/views.py
-from rest_framework.views import APIView
-from rest_framework.response import Response
-from rest_framework import status
-from .utils import obtener_dolar_a_clp
 
 class TasaCambioView(APIView):
     def get(self, request):
         valor = obtener_dolar_a_clp()
         if valor is not None:
-            return Response({"usd_to_clp": valor})
+            return Response({"usd_to_clp": valor}, status=status.HTTP_200_OK)
         else:
-            return Response({"error": "No se pudo obtener la tasa de cambio"}, status=status.HTTP_500_INTERNAL_SERVER_ERROR)
-
-
+            return Response(
+                {"error": "No se pudo obtener la tasa de cambio"},
+                status=status.HTTP_500_INTERNAL_SERVER_ERROR
+            )
 class DetalleOrdenAPIView(APIView):
     def get(self, request, pk):
         try:

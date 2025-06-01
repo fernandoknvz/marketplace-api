@@ -1,86 +1,84 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <title>Pago Seguro - FERREMAS</title>
-    <link rel="stylesheet" href="css/style.css">
-    <style>
-        body { font-family: Arial, sans-serif; margin: 0; padding: 0; }
-        header { background-color: #444; color: white; padding: 1em; text-align: center; }
-        nav { background-color: #eee; padding: 0.5em; text-align: center; }
-        nav a { margin: 0 1em; text-decoration: none; color: #333; font-weight: bold; }
-        main { max-width: 500px; margin: 2em auto; padding: 2em; border: 1px solid #ccc; border-radius: 10px; box-shadow: 0 0 10px rgba(0,0,0,0.1); }
-        label { display: block; margin-top: 1em; font-weight: bold; }
-        input, select { width: 100%; padding: 0.5em; margin-top: 0.3em; border: 1px solid #ccc; border-radius: 5px; }
-        button { margin-top: 1.5em; padding: 0.7em 1.5em; background-color: #444; color: white; border: none; border-radius: 5px; cursor: pointer; }
-        button:hover { background-color: #333; }
-        #mensaje { margin-top: 1em; font-weight: bold; color: green; }
-        .loader {
-  border: 6px solid #f3f3f3;
-  border-top: 6px solid #444;
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
-  animation: spin 1s linear infinite;
-  margin: 0 auto;
-}
-
-@keyframes spin {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(360deg); }
-}
-
-    </style>
+  <meta charset="UTF-8">
+  <title>Pago Seguro - FERREMAS</title>
+  <link rel="stylesheet" href="css/checkout.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
 </head>
 <body>
 
-    <header>
-        <h1>FERREMAS</h1>
-    </header>
-
-    <nav>
-        <a href="index.html">Inicio</a>
-        <a href="index.html#productos">Productos</a>
-        <a href="carrito.html">Carrito</a>
-        <a href="#contacto">Contacto</a>
-    </nav>
-
-    <main>
-        <h2>Simulación de Pago Seguro</h2>
-        <form id="pagoForm">
-            <!-- Campos ocultos -->
-            <input type="hidden" id="cliente_id" value="1">
-            <input type="hidden" id="empleado_id" value="1">
-
-
-            <label for="metodo">Método de Pago:</label>
-            <select id="metodo" required>
-                <option value="debito">Tarjeta Débito</option>
-                <option value="credito">Tarjeta Crédito</option>
-            </select>
-
-            <label for="titular">Nombre del Titular:</label>
-            <input type="text" id="titular" placeholder="Ej: Juan Pérez" required>
-
-            <label for="tarjeta">Número de Tarjeta:</label>
-            <input type="text" id="tarjeta" placeholder="0000 0000 0000 0000" required maxlength="19">
-
-            <label for="vencimiento">Fecha de Vencimiento:</label>
-            <input type="text" id="vencimiento" placeholder="MM/AA" required maxlength="5">
-
-            <label for="cvv">CVV:</label>
-            <input type="text" id="cvv" placeholder="123" required maxlength="4">
-
-            <button type="submit">Confirmar Pago</button>
-        </form>
-
-        <p id="mensaje"></p>
-    </main>
-    <div id="spinner" style="display: none; text-align: center; margin-top: 1em;">
-        <div class="loader"></div>
-        <p>Procesando pago...</p>
+  <header>
+    <div class="logo-container">
+      <img src="/static/img/logo.png" alt="Logo Ferremas" class="logo">
     </div>
+  </header>
 
-    <script src="js/checkout.js"></script>
+  <nav>
+    <div class="nav-izquierda">
+      <a href="index.html"><i class="fas fa-house"></i> Inicio</a>
+      <a href="index.html#productos"><i class="fas fa-boxes-stacked"></i> Productos</a>
+      <a href="#contacto"><i class="fas fa-envelope"></i> Contacto</a>
+    </div>
+    <div class="nav-derecha">
+      <a href="carrito.html" class="carrito-icono" title="Carrito">
+        <i class="fas fa-cart-shopping"></i>
+      </a>
+    </div>
+  </nav>
+
+  <main>
+    <h2 class="titulo-formulario">Simulación de Pago Seguro</h2>
+
+    <form id="pagoForm" class="formulario-pago">
+      <!-- Campos ocultos -->
+      <input type="hidden" id="cliente_id" value="1">
+      <input type="hidden" id="empleado_id" value="1">
+
+      <div class="form-group">
+        <label for="metodo">Método de Pago:</label>
+        <select id="metodo" required>
+          <option value="debito">Tarjeta Débito</option>
+          <option value="credito">Tarjeta Crédito</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="titular">Nombre del Titular:</label>
+        <input type="text" id="titular" placeholder="Ej: Juan Pérez" required>
+      </div>
+
+      <div class="form-group">
+        <label for="tarjeta">Número de Tarjeta:</label>
+        <input type="text" id="tarjeta" placeholder="0000 0000 0000 0000" required maxlength="19">
+      </div>
+
+      <div class="form-group">
+        <label for="vencimiento">Fecha de Vencimiento:</label>
+        <input type="text" id="vencimiento" placeholder="MM/AA" required maxlength="5">
+      </div>
+
+      <div class="form-group">
+        <label for="cvv">CVV:</label>
+        <input type="text" id="cvv" placeholder="123" required maxlength="3">
+      </div>
+
+      <button type="submit" class="btn-enviar">Confirmar Pago</button>
+    </form>
+
+    <p id="mensaje" class="mensaje-error"></p>
+
+    <div id="spinner" class="spinner" style="display: none;">
+      <div class="loader"></div>
+      <p>Procesando pago...</p>
+    </div>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 FERREMAS. Todos los derechos reservados.</p>
+    <p>Contacto: contacto@ferremas.cl | +56 9 1234 5678</p>
+  </footer>
+
+  <script src="js/checkout.js"></script>
 </body>
 </html>

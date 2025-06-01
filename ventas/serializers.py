@@ -1,7 +1,8 @@
 from rest_framework import serializers
 from .models import OrdenVenta, DetalleVenta, Cliente
 from productos.models import Producto, Precio
-
+from rest_framework import serializers
+from .models import OrdenVenta
 
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
@@ -44,8 +45,6 @@ class OrdenVentaCreateSerializer(serializers.Serializer):
         return orden
 
 
-
-
 class DetalleVentaModelSerializer(serializers.ModelSerializer):
     class Meta:
         model = DetalleVenta
@@ -59,11 +58,6 @@ class OrdenVentaSerializer(serializers.ModelSerializer):
         model = OrdenVenta
         fields = '__all__'
 
-
-# ventas/serializers.py
-
-from rest_framework import serializers
-from .models import OrdenVenta
 
 class SimularPagoSerializer(serializers.ModelSerializer):
     class Meta:

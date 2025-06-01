@@ -32,10 +32,10 @@ async function cargarProductos(categoriaId = "") {
     div.className = 'card';
 
     div.innerHTML = `
-      <img src="${producto.imagen_url}" alt="${producto.nombre}" style="width: 100%; height: 150px; object-fit: contain; margin-bottom: 10px;">
+      <img src="/static/img/${producto.id}.svg" alt="${producto.nombre}">
       <h3>${producto.nombre}</h3>
       <p><strong>Marca:</strong> ${producto.marca}</p>
-      <p><strong>Stock:</strong> ${producto.stock}</p>
+      <p><strong>Precio:</strong> $${producto.precio_actual?.valor?.toLocaleString("es-CL") || 'No disponible'}</p>
       <button class="ver-detalle" data-id="${producto.id}">Ver Detalle</button>
     `;
 
@@ -45,7 +45,7 @@ async function cargarProductos(categoriaId = "") {
       verDetalle(id);
     });
 
-    contenedor.appendChild(div); // ¡Esta línea es crucial!
+    contenedor.appendChild(div);
   });
 }
 
@@ -103,14 +103,23 @@ async function verDetalle(id) {
 
   const modalContent = document.getElementById('detalle-modal-content');
   modalContent.innerHTML = `
-    <h2>${data.nombre}</h2>
-    <p><strong>Marca:</strong> ${data.marca}</p>
-    <p><strong>Stock:</strong> ${data.stock}</p>
-    <p><strong>Precio:</strong> ${precioCLP} CLP</p>
-    <p><strong>Precio en USD:</strong> $${precioUSD}</p>
-    <p><strong>Fecha:</strong> ${data.precio_actual?.fecha || 'No disponible'}</p>
-    <button id="btnAgregarCarrito">Agregar al Carrito</button>
-  `;
+  <div class="modal-grid">
+    <div class="modal-img-container">
+      <img src="/static/img/${data.id}.svg" alt="${data.nombre}" class="modal-img">
+    </div>
+    <div class="modal-info">
+      <h2>${data.nombre}</h2>
+      <p><strong>Marca:</strong> ${data.marca}</p>
+      <p><strong>Stock:</strong> ${data.stock}</p>
+      <p><strong>Precio:</strong> ${precioCLP} CLP</p>
+      <p><strong>Precio en USD:</strong> $${precioUSD}</p>
+      <p><strong>Fecha:</strong> ${data.precio_actual?.fecha || 'No disponible'}</p>
+      <button id="btnAgregarCarrito">Agregar al Carrito</button>
+    </div>
+  </div>
+`;
+
+
 
   document.getElementById("btnAgregarCarrito").addEventListener("click", () => {
     agregarAlCarrito(data.id);
@@ -148,3 +157,33 @@ function cerrarModal() {
 // Inicializar
 cargarCategorias();
 cargarProductos();
+
+
+async function convertirCLPaUSD() {
+  const clp = parseFloat(document.getElementById("clpInput").value);
+  const resultado = document.getElementById("resultadoUSD");
+
+  if (isNaN(clp) || clp <= 0) {
+    resultado.textContent = "Ingrese un valor válido.";
+    return;
+  }
+
+  try {
+    const res = await fetch("http://localhost:8000/api/ventas/tasa-cambio/");
+    const data = await res.json();
+    const tasa = data?.usd_to_clp;
+
+    if (!tasa || tasa <= 0) {
+      resultado.textContent = "Tasa no disponible.";
+      return;
+    }
+
+    const usd = (clp / tasa).toFixed(2);
+    resultado.textContent = `USD $${usd}`;
+  } catch (error) {
+    console.error("Error consultando tasa:", error);
+    resultado.textContent = "Error al convertir.";
+  }
+}
+
+

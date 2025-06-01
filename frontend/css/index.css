@@ -152,6 +152,8 @@ button:hover {
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.25);
 }
 
+
+
 .close {
   position: absolute;
   top: 0.75rem;
@@ -201,4 +203,55 @@ footer p {
   border: 1px solid #ccc;
   min-width: 180px;
   max-width: 250px;
+}
+
+.card img {
+  width: 100%;
+  height: 200px; 
+  object-fit: cover;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  margin-bottom: 0.5rem;
+}
+
+
+
+.modal-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+  align-items: flex-start;
+}
+
+.modal-img-container {
+  flex: 1 1 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-img {
+  width: 100%;
+  max-width: 250px;
+  object-fit: contain;
+  border-radius: 8px;
+}
+
+.modal-info {
+  flex: 1 1 50%;
+}
+
+.modal-info h2 {
+  margin-top: 0;
+  font-size: 1.5rem;
+  color: #343a40;
+}
+
+.modal-info p {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+}
+
+.modal-info button {
+  margin-top: 1rem;
 }

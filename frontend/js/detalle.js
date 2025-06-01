@@ -16,6 +16,8 @@ document.addEventListener("DOMContentLoaded", () => {
         return;
       }
 
+      const formatter = new Intl.NumberFormat('es-CL');
+
       let html = `<h2>Orden de Compra #${ordenId}</h2>`;
       html += `
         <table>
@@ -35,8 +37,8 @@ document.addEventListener("DOMContentLoaded", () => {
           <tr>
             <td>${item.producto}</td>
             <td>${item.cantidad}</td>
-            <td>$${item.precio_unitario}</td>
-            <td>$${item.subtotal}</td>
+            <td>$${formatter.format(item.precio_unitario)}</td>
+            <td>$${formatter.format(item.subtotal)}</td>
           </tr>
         `;
       });
@@ -44,7 +46,7 @@ document.addEventListener("DOMContentLoaded", () => {
       html += `
           </tbody>
         </table>
-        <p style="text-align: right; margin-top: 1em;"><strong>Total pagado:</strong> $${data.total}</p>
+        <p style="text-align: right; margin-top: 1em;"><strong>Total pagado:</strong> $${formatter.format(data.total)}</p>
       `;
 
       contenedor.innerHTML = html;
