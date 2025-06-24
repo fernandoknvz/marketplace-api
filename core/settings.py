@@ -37,13 +37,16 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'productos',
     'rest_framework',
     'carrito',
-    'ventas',
+    'categorias',
     'clientes',
-    'empleados',
     'corsheaders',
+    'empleados',
+    'precios',
+    'productos',
+    'proveedores',
+    'ventas',
 ]
 
 MIDDLEWARE = [
@@ -87,19 +90,41 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'NAME': 'ferremas_db',
-        'USER': 'root',
-        'PASSWORD': '1234',
-        'HOST': '127.0.0.1',
-        'PORT': '3307',
-        'OPTIONS': {
-            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+
+import sys
+
+if 'test' in sys.argv:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'ferremas_db',
+            'USER': 'root',
+            'PASSWORD': '1234',
+            'HOST': 'localhost',
+            'PORT': '3307',
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            },
+            'TEST': {
+                'NAME': 'test_ferremas_db', 
+            }
         }
     }
-}
+else:
+    # Producción normal
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'ferremas_db',
+            'USER': 'root',
+            'PASSWORD': '1234',
+            'HOST': 'localhost',
+            'PORT': '3307',
+            'OPTIONS': {
+                'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
+            }
+        }
+    }
 
 
 

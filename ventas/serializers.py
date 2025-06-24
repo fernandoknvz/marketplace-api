@@ -1,8 +1,8 @@
 from rest_framework import serializers
 from .models import OrdenVenta, DetalleVenta, Cliente
-from productos.models import Producto, Precio
-from rest_framework import serializers
-from .models import OrdenVenta
+from productos.models import Producto
+from precios.models import Precio
+
 
 class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
