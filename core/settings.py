@@ -90,6 +90,7 @@ WSGI_APPLICATION = 'core.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+<<<<<<< HEAD
 
 import sys
 
@@ -123,6 +124,18 @@ else:
             'OPTIONS': {
                 'init_command': "SET sql_mode='STRICT_TRANS_TABLES'"
             }
+=======
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'ferremas_db',
+        'USER': 'root',
+        'PASSWORD': 'Espaciovolatil1',
+        'HOST': '127.0.0.1',
+        'PORT': '3306',
+        'OPTIONS': {
+            'init_command': "SET sql_mode='STRICT_TRANS_TABLES'",
+>>>>>>> f79c8435e8a0d52bcb3e2151a53eb2bd2d2428c8
         }
     }
 
