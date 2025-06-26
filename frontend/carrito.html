@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <title>Carrito - FERREMAS</title>
     <link rel="stylesheet" href="css/carrito.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" rel="stylesheet">
 </head>
 <body>
@@ -33,9 +34,21 @@
 
         <div class="acciones">
             <button onclick="vaciarCarrito()">Vaciar Carrito</button>
-            <button onclick="window.location.href='checkout.html'">Ir a Pagar</button>
+            <button onclick="mostrarModalCliente()">Ir a Pagar</button>
         </div>
     </main>
+    <!-- Modal Elección Cliente -->
+    <div id="clienteModal" class="modal">
+      <div class="modal-content">
+        <h2>¿Cómo deseas continuar?</h2>
+        <p>Elige una opción para continuar con tu compra</p>
+        <div class="modal-buttons">
+          <button id="btnRegistrar" class="btn-primario">Iniciar Sesión / Registrarme</button>
+          <button id="btnInvitado" class="btn-secundario">Comprar como Invitado</button>
+        </div>
+      </div>
+    </div>
+    
     <footer>
       <p>&copy; 2025 FERREMAS. Todos los derechos reservados.</p>
       <p>Contacto: contacto@ferremas.cl | +56 9 1234 5678</p>

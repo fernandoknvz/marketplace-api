@@ -5,7 +5,9 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 from .serializers import OrdenVentaCreateSerializer
-from .models import OrdenVenta
+from .models import OrdenVenta, DetalleVenta, Cliente, Empleado
+from precios.models import Precio
+from carrito.models import Carrito, ItemCarrito
 import requests
 from .utils import obtener_dolar_a_clp
 
@@ -110,3 +112,60 @@ class DetalleOrdenAPIView(APIView):
 
         except OrdenVenta.DoesNotExist:
             return Response({"error": "Orden no encontrada"}, status=status.HTTP_404_NOT_FOUND)
+
+
+class ConfirmarPagoView(APIView):
+    def post(self, request):
+        data = request.data
+        try:
+            cliente = Cliente.objects.get(id=data["cliente_id"])
+            empleado = Empleado.objects.get(id=data["empleado_id"])
+            metodo = data.get("metodo_pago", "Tarjeta")
+
+            carrito = Carrito.objects.filter(cliente=cliente).latest('fecha_creacion')
+            items = ItemCarrito.objects.filter(carrito=carrito)
+
+            if not items.exists():
+                return Response({"error": "El carrito está vacío"}, status=400)
+
+            # 2. Crear la orden
+            orden = OrdenVenta.objects.create(
+                cliente=cliente,
+                empleado=empleado,
+                metodo_pago=metodo,
+                estado_pago="pagado"
+            )
+
+            # 3. Agregar cada item como DetalleVenta
+            for item in items:
+                # Precio más reciente
+                precio_actual = Precio.objects.filter(producto=item.producto).order_by('-fecha').first()
+                if not precio_actual:
+                    return Response({"error": f"No hay precio registrado para {item.producto.nombre}"}, status=400)
+
+                subtotal = item.cantidad * precio_actual.valor
+
+                DetalleVenta.objects.create(
+                    orden=orden,
+                    producto=item.producto,
+                    cantidad=item.cantidad,
+                    precio_unitario=precio_actual.valor,
+                    subtotal=subtotal
+                )
+
+            # 4. Eliminar carrito (opcional)
+            carrito.delete()
+
+            return Response({
+                "mensaje": "Pago confirmado",
+                "orden_id": orden.id
+            }, status=201)
+
+        except Cliente.DoesNotExist:
+            return Response({"error": "Cliente no encontrado"}, status=404)
+        except Empleado.DoesNotExist:
+            return Response({"error": "Empleado no encontrado"}, status=404)
+        except Carrito.DoesNotExist:
+            return Response({"error": "Carrito no encontrado"}, status=404)
+        except Exception as e:
+            return Response({"error": str(e)}, status=400)

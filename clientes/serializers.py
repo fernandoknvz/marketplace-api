@@ -1,7 +1,7 @@
 from rest_framework import serializers
 from .models import Cliente, ConsultaContacto
 
-class ClienteRegistroSerializer(serializers.ModelSerializer):
+class ClienteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Cliente
         fields = ['nombre', 'apellido', 'email', 'password']

@@ -2,7 +2,7 @@ document.getElementById("pagoForm").addEventListener("submit", function (e) {
     e.preventDefault();
 
     const cliente_id = document.getElementById("cliente_id").value;
-    const empleado_id = document.getElementById("empleado_id").value;
+    const empleado_id = 1;  // ID real de "VENTA ONLINE"
     const metodo = document.getElementById("metodo").value;
     const titular = document.getElementById("titular").value.trim();
     const tarjeta = document.getElementById("tarjeta").value.trim().replace(/\s+/g, '');

@@ -1,7 +1,7 @@
 const API_URL = 'http://localhost:8000/api/productos/';
 const CATEGORIAS_URL = 'http://localhost:8000/api/categorias/';
 const TASA_CAMBIO_URL = 'http://localhost:8000/api/ventas/tasa-cambio/';
-const AGREGAR_URL = 'http://localhost:8000/api/agregar/';
+const AGREGAR_URL = 'http://localhost:8000/api/carrito/agregar/';
 
 async function cargarCategorias() {
   const res = await fetch(CATEGORIAS_URL);
